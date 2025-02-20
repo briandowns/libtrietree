@@ -1,3 +1,4 @@
+#include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -107,6 +108,13 @@ search(node_t *root, const char *key) {
     return current != NULL && current->is_word_end;
 }
 
+void
+to_lower(char *s) {
+    for (int i = 0; s[i] != '\0'; i++) {
+        s[i] = tolower(s[i]);
+    }
+}
+
 int
 main(int argc, char **argv)
 {
@@ -121,6 +129,7 @@ main(int argc, char **argv)
     char word[100];
     while (fgets(word, 100, f) != NULL) {
         word[strcspn(word, "\r\n")] = 0;
+        to_lower(word);
         printf("%s\n", word);
         insert(root, word);
     }
