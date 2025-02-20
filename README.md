@@ -20,7 +20,7 @@ make install
 
 ## Example 
 
-The example loads all words from the system dictionary, ignorning all words that non-alphabetical characters, searched for a few, deletes 1, and then searches for the deleted word.
+The example loads all words from the system dictionary, ignoring all words that non-alphabetical characters, searched for a few, deletes 1, and then searches for the deleted word.
 
 Build the example:
 
