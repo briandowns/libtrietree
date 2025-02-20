@@ -2,6 +2,7 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdint.h>
 #include <string.h>
 
 #define MAX_SIZE 26
@@ -115,6 +116,17 @@ to_lower(char *s) {
     }
 }
 
+bool
+is_alpha_word(const char *word)
+{
+    for (uint8_t i = 0; i < strlen(word); i++) {
+        if (!isalpha(word[i])) {
+            return false;
+        }
+    }
+    return true;
+}
+
 int
 main(int argc, char **argv)
 {
@@ -129,6 +141,9 @@ main(int argc, char **argv)
     char word[100];
     while (fgets(word, 100, f) != NULL) {
         word[strcspn(word, "\r\n")] = 0;
+        if (is_alpha_word(word) == false) {
+            continue;
+        }
         to_lower(word);
         printf("%s\n", word);
         insert(root, word);
