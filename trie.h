@@ -57,19 +57,21 @@ void
 trie_free(node_t *node);
 
 /**
- * insert a new key into the tree.
+ * insert inserts a new key into the tree. Returns 0 on success and -1
+ * on failure.
  */
 int
 trie_insert(node_t *root, const char *key);
 
 /**
- * delete a key from the tree.
+ * delete deletes a key from the tree.
  */
 void
 trie_delete(node_t *root, const char *key);
 
 /**
- * search for the given key.
+ * search searches the tree for the given key and returns true if found 
+ * or false if it's not.
  */
 bool
 trie_search(node_t *root, const char *key);

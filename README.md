@@ -28,7 +28,6 @@ Build the example:
 make example
 ```
 
-
 ## Contributing
 
 Please feel free to open a PR!
