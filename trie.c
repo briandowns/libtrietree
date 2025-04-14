@@ -124,7 +124,7 @@ bool
 trie_search(node_t *root, const char *key) {
     node_t *current = root;
 
-    for (size_t i = 0; i < strlen(key); i++) {
+    for (uint8_t i = 0; key[i] != '\0'; i++) {
         uint8_t index = key[i] - 'a';
         if (current->children[index] == NULL) {
             return false;
