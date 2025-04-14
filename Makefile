@@ -60,4 +60,4 @@ clean:
 
 .PHONY: example
 example: clean
-	$(CC) -o $@ trie.c example.c $(CFLAGS) $(LDFLAGS)
+	$(CC) -o $@ trie.c example1.c $(CFLAGS) $(LDFLAGS)
