@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
- #ifdef __cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
