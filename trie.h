@@ -77,10 +77,12 @@ bool
 trie_key_exists(node_t *root, const char *key);
 
 /**
- * trie_search recursively searches all entries matching the given prefix.
+ * trie_search recursively searches all entries matching the given prefix. If
+ * a match is found, it's written to the given result buffer. The code will
+ * return if the buffer is NULL.
  */ 
 void
-trie_search(node_t *root, char *prefix, int depth);
+trie_search(node_t *root, char *prefix, int depth, char *result);
 
 /**
  * trie_get_node walks the tree to find the node for the given prefix and

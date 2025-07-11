@@ -142,21 +142,26 @@ trie_key_exists(node_t *root, const char *key) {
 }
 
 void
-trie_search(node_t *root, char *prefix, int depth)
+trie_search(node_t *root, char *prefix, int depth, char *result)
 {
     if (root == NULL) {
+        return;
+    }
+
+    if (result == NULL) {
         return;
     }
 
     if (root->is_word_end) {
         prefix[depth] = '\0';
         printf("%s\n", prefix);
+        strcpy(result, prefix);
     }
 
-    for (int i = 0; i < 26; i++) {
+    for (int i = 0; i < MAX_SIZE; i++) {
         if (root->children[i]) {
             prefix[depth] = MIN_CHAR + i;
-            trie_search(root->children[i], prefix, depth + 1);
+            trie_search(root->children[i], prefix, depth + 1, result);
         }
     }
 }

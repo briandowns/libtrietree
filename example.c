@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
-#include <termios.h>
 
 #include "trie.h"
 
@@ -51,39 +50,12 @@ main(void)
 
     fclose(f);
 
-    // printf("dog: %s\n", trie_search(root, "dog") ? "Found" : "Not Found");
-    // printf("cat: %s\n", trie_search(root, "cat") ? "Found" : "Not Found");
-    // printf("blahblahblah: %s\n", trie_search(root, "blahblahblah") ? "Found" : "Not Found");
+    printf("dog: %s\n", trie_key_exists(root, "dog") ? "Found" : "Not Found");
+    printf("cat: %s\n", trie_key_exists(root, "cat") ? "Found" : "Not Found");
+    printf("blahblahblah: %s\n", trie_key_exists(root, "blahblahblah") ? "Found" : "Not Found");
 
-    // trie_delete(root, "cat");
-    // printf("cat: %s\n", trie_search(root, "cat") ? "Found" : "Not Found");
-
-    char prefix[MAX_WORD_LEN] = {0};
-    int length = 0;
-    int ch;
-    while (1) {
-        ch = getchar();
-        if (ch == '\n' || ch == '\r') {
-            printf("\n");
-            length = 0;
-            prefix[0] = '\0';
-            continue;
-        }
-
-        if (isalpha(ch) && length < MAX_WORD_LEN - 1) {
-            prefix[length++] = tolower(ch);
-            prefix[length] = '\0';
-
-            printf("\nSuggestions for \"%s\":\n", prefix); 
-            node_t *node = trie_get_node(root, prefix);
-            if (node) {
-                trie_search(node, prefix, length);
-            } else {
-                printf("No matches found.\n");
-            }
-            printf("\n");
-        }
-    }
+    trie_delete(root, "cat");
+    printf("cat: %s\n", trie_key_exists(root, "cat") ? "Found" : "Not Found");
 
     trie_free(root);
 
