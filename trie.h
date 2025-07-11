@@ -25,7 +25,7 @@
  * SUCH DAMAGE.
  */
 
- #ifdef __cplusplus
+#ifdef __cplusplus
 extern "C" {
 #endif
 
@@ -70,11 +70,24 @@ void
 trie_delete(node_t *root, const char *key);
 
 /**
- * search searches the tree for the given key and returns true if found 
- * or false if it's not.
+ * trie_key_exists searches the tree for the given key and returns true if
+ * found or false if it's not.
  */
 bool
-trie_search(node_t *root, const char *key);
+trie_key_exists(node_t *root, const char *key);
+
+/**
+ * trie_search recursively searches all entries matching the given prefix.
+ */ 
+void
+trie_search(node_t *root, char *prefix, int depth);
+
+/**
+ * trie_get_node walks the tree to find the node for the given prefix and
+ * returns it if found.
+ */
+node_t*
+trie_get_node(node_t *root, const char *prefix);
 
 #endif /** end __TRIE_H */
 #ifdef __cplusplus

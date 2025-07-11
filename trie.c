@@ -25,14 +25,16 @@
  * SUCH DAMAGE.
  */
 
-#define MIN_CHAR 'a'
-
+#include <ctype.h>
 #include <stdbool.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "trie.h"
+
+#define MIN_CHAR 'a'
 
 node_t*
 trie_new()
@@ -121,11 +123,15 @@ trie_delete(node_t *root, const char *key) {
 }
 
 bool
-trie_search(node_t *root, const char *key) {
+trie_key_exists(node_t *root, const char *key) {
+    if (root == NULL) {
+        return false;
+    }
+
     node_t *current = root;
 
     for (size_t i = 0; i < strlen(key); i++) {
-        uint8_t index = key[i] - 'a';
+        uint8_t index = key[i] - MIN_CHAR;
         if (current->children[index] == NULL) {
             return false;
         }
@@ -133,4 +139,41 @@ trie_search(node_t *root, const char *key) {
     }
 
     return current != NULL && current->is_word_end;
+}
+
+void
+trie_search(node_t *root, char *prefix, int depth)
+{
+    if (root == NULL) {
+        return;
+    }
+
+    if (root->is_word_end) {
+        prefix[depth] = '\0';
+        printf("%s\n", prefix);
+    }
+
+    for (int i = 0; i < 26; i++) {
+        if (root->children[i]) {
+            prefix[depth] = MIN_CHAR + i;
+            trie_search(root->children[i], prefix, depth + 1);
+        }
+    }
+}
+
+node_t*
+trie_get_node(node_t *root, const char *prefix)
+{
+    while (*prefix && root) {
+        if (!isalpha(*prefix)) {
+            prefix++;
+            continue;
+        }
+
+        int idx = tolower(*prefix) - MIN_CHAR;
+        root = root->children[idx];
+        prefix++;
+    }
+
+    return root;
 }
