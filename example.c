@@ -1,7 +1,6 @@
 #include <ctype.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdint.h>
 #include <string.h>
 
@@ -51,12 +50,12 @@ main(void)
 
     fclose(f);
 
-    printf("dog: %s\n", trie_search(root, "dog") ? "Found" : "Not Found");
-    printf("cat: %s\n", trie_search(root, "cat") ? "Found" : "Not Found");
-    printf("blahblahblah: %s\n", trie_search(root, "blahblahblah") ? "Found" : "Not Found");
+    printf("dog: %s\n", trie_key_exists(root, "dog") ? "Found" : "Not Found");
+    printf("cat: %s\n", trie_key_exists(root, "cat") ? "Found" : "Not Found");
+    printf("blahblahblah: %s\n", trie_key_exists(root, "blahblahblah") ? "Found" : "Not Found");
 
     trie_delete(root, "cat");
-    printf("cat: %s\n", trie_search(root, "cat") ? "Found" : "Not Found");
+    printf("cat: %s\n", trie_key_exists(root, "cat") ? "Found" : "Not Found");
 
     trie_free(root);
 
